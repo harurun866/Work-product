@@ -19,6 +19,13 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
+            $table->text('introduction')->nullable();
+            $table->string('genre')->nullable();
+            $table->string('speciality')->nullable();
+            $table->string('learning_style')->nullable();
+            $table->integer('year')->nullable();
+            $table->string('skill')->nullable();
+            $table->string('goal')->nullable();
         });
     }
 

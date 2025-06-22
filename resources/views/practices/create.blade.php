@@ -1,106 +1,106 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <title>練習記録作成</title>
+    <meta charset="utf-8">
+    <title>Practice Log</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
         body {
-            font-family: sans-serif;
-            background-color: #f4f4f4;
-            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            margin: 2rem;
         }
 
         h1 {
-            color: #333;
-        }
-
-        form {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            font-size: 24px;
+            margin-bottom: 1rem;
         }
 
         label {
-            display: block;
-            margin-bottom: 10px;
-            color: #555;
+            font-weight: bold;
         }
 
         input[type="text"],
         input[type="date"],
         textarea {
             width: 100%;
-            padding: 8px;
+            padding: 0.5rem;
+            margin-top: 0.3rem;
+            margin-bottom: 1rem;
             border: 1px solid #ccc;
-            border-radius: 4px;
-            margin-top: 4px;
+            border-radius: 8px;
             box-sizing: border-box;
         }
 
         textarea {
-            resize: vertical;
+            height: 120px;
         }
 
-        input[type="submit"] {
-            background-color: #007BFF;
-            color: white;
-            padding: 10px 16px;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            margin-top: 20px;
+        .form-group {
+            margin-bottom: 1.5rem;
         }
 
-        input[type="submit"]:hover {
-            background-color: #0056b3;
+        .section {
+            margin-bottom: 2rem;
         }
     </style>
 </head>
 
 <body>
-    <h1>練習記録作成</h1>
+    <h1>Practice Log</h1>
+    <div class="form-group">
+        <label for="date">Date：</label><br>
+        <input type="date" name="date" id="date">
+    </div>
 
-    <form action="/practices" method="POST">
-        @csrf
+    <div class="form-group">
+        <label for="duration">Practice Time：</label><br>
+        <input type="text" name="duration" id="duration">
+    </div>
 
-        <label>日付：
-            <input type="date" name="date">
-        </label>
+    <div class="form-group">
+        <label for="instrument">Instrument：</label><br>
+        <input type="text" name="instrument" id="instrument">
+    </div>
 
-        <label>練習時間：
-            <input type="text" name="time">
-        </label>
+    <div class="form-group">
+        <label for="genre">Genre：</label><br>
+        <input type="text" name="genre" id="genre">
+    </div>
 
-        <label>使用楽器：
-            <input type="text" name="instrument">
-        </label>
+    <div class="form-group">
+        <label for="content">Practice Content：</label>
+        <textarea name="content" id="content"></textarea>
+    </div>
 
-        <label>音楽ジャンル：
-            <input type="text" name="genre">
-        </label>
+    <div class="form-group">
+        <label for="reflection">Reflection：</label>
+        <textarea name="reflection" id="reflection"></textarea>
+    </div>
 
-        <label>練習内容：
-            <textarea name="content" rows="4"></textarea>
-        </label>
+    <div class="form-group">
+        <label for="next_goal">Next Goal：</label>
+        <textarea name="next_goal" id="next_goal"></textarea>
+    </div>
 
-        <label>振り返り：
-            <textarea name="reflection" rows="4"></textarea>
-        </label>
+    <div class="form-group">
+        <label for="memo">Memo：</label>
+        <textarea name="memo" id="memo"></textarea>
+    </div>
 
-        <label>次回の目標：
-            <input type="text" name="next_goal">
-        </label>
-
-        <label>メモ：
-            <textarea name="memo" rows="3"></textarea>
-        </label>
-
-        <input type="submit" value="保存">
-    </form>
+    <button type="submit">Record</button>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script>
+        flatpickr("#date", {
+            dateFormat: "Y-m-d", // サーバーに送る形式
+            locale: "en",
+            altInput: true, // ユーザーに見せる入力欄（代替表示）
+            altFormat: "F j, Y", // 例：June 22, 2025
+            allowInput: true
+        });
+    </script>
 </body>
 
 </html>

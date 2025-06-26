@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Practice extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'user_id',
+        'date',
+        'time',
+        'instrument',
+        'genre',
+        'content',
+        'reflection',
+        'next_goal',
+        'memo',
+    ];
 }

@@ -19,7 +19,7 @@ Route::get('/', function () {
     return view('practices.index');
 });
 
-Route::get('/dashboard', function () {
+Route::get('/', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -27,7 +27,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::get('/practices', [PracticeController::class, 'index'])->name('index');
+    Route::get('/practices', [PracticeController::class, 'index'])->name('practices.index');
+    Route::get('/practices/create', [PracticeController::class, 'create'])->name('practices.create');
+    Route::post('/practices', [PracticeController::class, 'store'])->name('practices.store');
+    Route::get('/practices/{id}', [PracticeController::class, 'show'])->name('practices.show');
 });
 
 require __DIR__ . '/auth.php';

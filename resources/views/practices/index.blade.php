@@ -156,7 +156,12 @@
                 <a href="{{ route('practices.show', $practice->id) }}">Detail</a>
             </div>
             <div class='practice-body'>
-                <p>Time: {{ $practice->duration }}</p>
+                @php
+                $duration = $practice->duration ?? '00:00:00';
+                [$h, $m, $s] = explode(':', $duration);
+                @endphp
+                <p>Time: {{ (int)$h }}h {{ (int)$m }}min</p>
+
                 <p>Content: {{ $practice->content }}</p>
             </div>
         </div>

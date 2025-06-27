@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Practice Log</title>
+    <title>Edit Practice Log</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <style>
@@ -94,12 +94,19 @@
 </head>
 
 <body>
-    <h1>Practice Log</h1>
-    <form action="/practices" method="POST">
+    <h1>Edit Practice Log</h1>
+    <form action="{{ route('practices.update', $practice->id) }}" method="POST">
         @csrf
+        @method('PUT')
+
+        @php
+        $duration = $practice->duration ?? '00:00:00';
+        list($h, $m, $s) = explode(':', $duration);
+        @endphp
+
         <div class="form-group">
             <label for="date">Date：</label>
-            <input type="date" name="date" id="date">
+            <input type="date" name="date" id="date" value="{{ $practice->date }}">
         </div>
 
         <div class="form-group">
@@ -116,39 +123,41 @@
             </div>
         </div>
 
+
+
         <div class="form-group">
             <label for="instrument">Instrument：</label>
-            <input type="text" name="instrument" id="instrument">
+            <input type="text" name="instrument" id="instrument" value="{{ $practice->instrument }}">
         </div>
 
         <div class="form-group">
             <label for="genre">Genre：</label>
-            <input type="text" name="genre" id="genre">
+            <input type="text" name="genre" id="genre" value="{{ $practice->genre }}">
         </div>
 
         <div class="form-group">
             <label for="content">Practice Content：</label>
-            <textarea name="content" id="content"></textarea>
+            <textarea name="content" id="content">{{ $practice->content }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="reflection">Reflection：</label>
-            <textarea name="reflection" id="reflection"></textarea>
+            <textarea name="reflection" id="reflection">{{ $practice->reflection }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="next_goal">Next Goal：</label>
-            <textarea name="next_goal" id="next_goal"></textarea>
+            <textarea name="next_goal" id="next_goal">{{ $practice->next_goal }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="memo">Memo：</label>
-            <textarea name="memo" id="memo"></textarea>
+            <textarea name="memo" id="memo">{{ $practice->memo }}</textarea>
         </div>
 
         <div class="button-group">
-            <button type="submit" class="btn-submit">Record</button>
-            <a href="/practices" class="btn-back">Back</a>
+            <button type="submit" class="btn-submit">Update</button>
+            <a href="/practices/{{ $practice->id }}" class="btn-back">Cancel</a>
         </div>
     </form>
 

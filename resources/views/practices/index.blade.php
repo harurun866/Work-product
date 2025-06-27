@@ -52,21 +52,15 @@
             box-shadow: 0 8px 28px rgba(245, 198, 203, 0.8);
         }
 
-        .button-group a:hover {
-            background-color: #f5c6cb;
-            /* ほんの少し濃いピンク */
-            box-shadow: 0 8px 28px rgba(245, 198, 203, 0.8);
-        }
-
-        .button-group a:hover {
-            background-color: #f5c6cb;
-            /* ほんの少し濃いピンク */
-            box-shadow: 0 8px 28px rgba(245, 198, 203, 0.8);
-        }
-
-        .button-group a:hover {
-            background-color: #0288d1;
-            box-shadow: 0 8px 28px rgba(2, 136, 209, 0.6);
+        .alert-success {
+            background-color: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+            padding: 1rem 1.2rem;
+            margin-bottom: 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            text-align: center;
         }
 
         .practices {
@@ -148,19 +142,45 @@
         <a href="/practices/create">Create</a>
     </div>
 
+    {{-- フラッシュメッセージ表示 --}}
+    @if(session('success'))
+    <div class="alert-success">
+        {{ session('success') }}
+    </div>
+    @endif
+
     <div class='practices'>
         @forelse ($practices as $practice)
         <div class='practice'>
             <div class='practice-title'>
                 <span>{{ $practice->date }} - {{ $practice->instrument }}</span>
-                <a href="{{ route('practices.show', $practice->id) }}">Detail</a>
+                <div style="display: flex; gap: 0.5rem;">
+                    <a href="{{ route('practices.show', $practice->id) }}">Detail</a>
+
+                    <form action="{{ route('practices.delete', $practice->id) }}" method="POST" onsubmit="return confirm('This action cannot be undone. Are you sure you want to delete this record?');">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" style="
+                            background-color: #dc3545;
+                            color: #ffffff;
+                            font-weight: 600;
+                            border: none;
+                            border-radius: 20px;
+                            padding: 0.2rem 0.6rem;
+                            cursor: pointer;
+                            font-size: 0.9rem;
+                            box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+                        ">Delete</button>
+                    </form>
+                </div>
             </div>
+
             <div class='practice-body'>
                 @php
                 $duration = $practice->duration ?? '00:00:00';
                 [$h, $m, $s] = explode(':', $duration);
                 @endphp
-                <p>Time: {{ (int)$h }}h {{ (int)$m }}min</p>
+                <p>Duration: {{ (int)$h }}h {{ (int)$m }}min</p>
 
                 <p>Content: {{ $practice->content }}</p>
             </div>
@@ -169,6 +189,7 @@
         <p>Your practice log is empty.</p>
         @endforelse
     </div>
+
     <div class="footer">
         <a href="/">Back</a>
     </div>

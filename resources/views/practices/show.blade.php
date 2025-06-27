@@ -147,7 +147,7 @@
         @endphp
 
         <div class="detail-item">
-            <strong>Time:</strong> <span>{{ (int)$h }}h {{ (int)$m }}min</span>
+            <strong>Duration:</strong> <span>{{ (int)$h }}h {{ (int)$m }}min</span>
         </div>
 
 

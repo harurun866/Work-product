@@ -110,7 +110,7 @@
         </div>
 
         <div class="form-group">
-            <label for="duration">Practice Duration:</label>
+            <label for="duration">Duration:</label>
             <div style="display: flex; gap: 1rem;">
                 <div>
                     <label for="hours">Hour</label>

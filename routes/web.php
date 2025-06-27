@@ -31,6 +31,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/practices/create', [PracticeController::class, 'create'])->name('practices.create');
     Route::post('/practices', [PracticeController::class, 'store'])->name('practices.store');
     Route::get('/practices/{id}', [PracticeController::class, 'show'])->name('practices.show');
+    Route::get('/practices/{practice}/edit', [PracticeController::class, 'edit'])->name('practices.edit');
+    Route::put('/practices/{practice}', [PracticeController::class, 'update'])->name('practices.update');
 });
 
 require __DIR__ . '/auth.php';

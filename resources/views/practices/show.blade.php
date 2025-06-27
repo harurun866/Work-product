@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <title>Practice Detail</title>
+    <title>Practice Log</title>
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet" />
     <style>
         body {
@@ -101,18 +101,34 @@
 
         .buttons a {
             display: inline-block;
-            padding: 0.7rem 1.8rem;
-            margin: 0 0.7rem;
-            background-color: #6c757d;
-            color: white;
-            font-weight: 700;
+            padding: 0.6rem 1.2rem;
+            margin: 0 0.6rem;
             border-radius: 30px;
+            font-size: 1rem;
             text-decoration: none;
-            box-shadow: 0 5px 18px rgba(108, 117, 125, 0.4);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
         }
 
-        .buttons a:hover {
+        .btn-edit {
+            background-color: #f8d7da;
+            color: #000000;
+            box-shadow: 0 5px 18px rgba(248, 215, 218, 0.6);
+        }
+
+        .btn-edit:hover {
+            background-color: #f5c6cb;
+            box-shadow: 0 8px 28px rgba(245, 198, 203, 0.8);
+        }
+
+        .btn-back {
+            background-color: #6c757d;
+            color: #fff;
+            box-shadow: 0 5px 18px rgba(108, 117, 125, 0.4);
+        }
+
+        .btn-back:hover {
             background-color: #495057;
             box-shadow: 0 8px 28px rgba(73, 80, 87, 0.6);
         }
@@ -125,7 +141,16 @@
     <div class="detail-card">
         <div class="detail-item"><strong>Date:</strong> <span>{{ $practice->date }}</span></div>
         <div class="detail-item"><strong>Instrument:</strong> <span>{{ $practice->instrument }}</span></div>
-        <div class="detail-item"><strong>Time:</strong> <span>{{ $practice->duration }}</span></div>
+        @php
+        $duration = $practice->duration ?? '00:00:00';
+        list($h, $m, $s) = explode(':', $duration);
+        @endphp
+
+        <div class="detail-item">
+            <strong>Time:</strong> <span>{{ (int)$h }}h {{ (int)$m }}min</span>
+        </div>
+
+
         <div class="detail-item"><strong>Genre:</strong> <span>{{ $practice->genre }}</span></div>
 
         <div class="text-section left">
@@ -150,7 +175,8 @@
     </div>
 
     <div class="buttons">
-        <a href="{{ route('practices.index') }}">Back to List</a>
+        <a href="/practices/{{ $practice->id }}/edit" class="btn-edit">Edit</a>
+        <a href="{{ route('practices.index') }}" class="btn-back">Back</a>
     </div>
 </body>
 

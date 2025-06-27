@@ -106,7 +106,7 @@
 
         <div class="form-group">
             <label for="date">Date：</label>
-            <input type="date" name="date" id="date" value="{{ $practice->date }}">
+            <input type="date" name="date" id="date" value="{{ old('date', $practice->date) }}">
         </div>
 
         <div class="form-group">
@@ -114,45 +114,43 @@
             <div style="display: flex; gap: 1rem;">
                 <div>
                     <label for="hours">Hour</label>
-                    <input type="number" name="hours" id="hours" min="0" max="23" value="{{ old('hours', 0) }}">
+                    <input type="number" name="hours" id="hours" min="0" max="23" value="{{ old('hours', $h) }}">
                 </div>
                 <div>
                     <label for="minutes">Minute</label>
-                    <input type="number" name="minutes" id="minutes" min="0" max="59" value="{{ old('minutes', 0) }}">
+                    <input type="number" name="minutes" id="minutes" min="0" max="59" value="{{ old('minutes', $m) }}">
                 </div>
             </div>
         </div>
 
-
-
         <div class="form-group">
             <label for="instrument">Instrument：</label>
-            <input type="text" name="instrument" id="instrument" value="{{ $practice->instrument }}">
+            <input type="text" name="instrument" id="instrument" value="{{ old('instrument', $practice->instrument) }}">
         </div>
 
         <div class="form-group">
             <label for="genre">Genre：</label>
-            <input type="text" name="genre" id="genre" value="{{ $practice->genre }}">
+            <input type="text" name="genre" id="genre" value="{{ old('genre', $practice->genre) }}">
         </div>
 
         <div class="form-group">
             <label for="content">Practice Content：</label>
-            <textarea name="content" id="content">{{ $practice->content }}</textarea>
+            <textarea name="content" id="content">{{ old('content', $practice->content) }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="reflection">Reflection：</label>
-            <textarea name="reflection" id="reflection">{{ $practice->reflection }}</textarea>
+            <textarea name="reflection" id="reflection">{{ old('reflection', $practice->reflection) }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="next_goal">Next Goal：</label>
-            <textarea name="next_goal" id="next_goal">{{ $practice->next_goal }}</textarea>
+            <textarea name="next_goal" id="next_goal">{{ old('next_goal', $practice->next_goal) }}</textarea>
         </div>
 
         <div class="form-group">
             <label for="memo">Memo：</label>
-            <textarea name="memo" id="memo">{{ $practice->memo }}</textarea>
+            <textarea name="memo" id="memo">{{ old('memo', $practice->memo) }}</textarea>
         </div>
 
         <div class="button-group">

@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <title>Practice Records</title>
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -22,10 +21,6 @@
             font-size: 2rem;
             margin-bottom: 1.5rem;
             text-align: center;
-            letter-spacing: 0.05em;
-            font-style: italic;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-            color: #000000;
         }
 
         .button-group {
@@ -36,20 +31,15 @@
         .button-group a {
             padding: 0.6rem 1.2rem;
             background-color: #f8d7da;
-            /* 薄いピンク */
             color: #000000;
-            /* 文字色を黒に */
             font-weight: 700;
             border-radius: 30px;
             text-decoration: none;
             box-shadow: 0 5px 18px rgba(248, 215, 218, 0.6);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .button-group a:hover {
             background-color: #f5c6cb;
-            /* ほんの少し濃いピンク */
-            box-shadow: 0 8px 28px rgba(245, 198, 203, 0.8);
         }
 
         .alert-success {
@@ -78,11 +68,9 @@
         .practice-title {
             font-size: 1.3rem;
             font-weight: 700;
-            color: #000000;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            letter-spacing: 0.03em;
         }
 
         .practice-title a {
@@ -94,7 +82,6 @@
             padding: 0.2rem 0.6rem;
             border: 1.5px solid #0288d1;
             border-radius: 20px;
-            transition: background-color 0.3s ease, color 0.3s ease;
         }
 
         .practice-title a:hover {
@@ -104,12 +91,7 @@
 
         .practice-body {
             margin-top: 0.6rem;
-            color: #000000;
             font-weight: 500;
-        }
-
-        .practice-body p {
-            margin: 0.25rem 0;
         }
 
         .footer {
@@ -124,13 +106,54 @@
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            box-shadow: 0 5px 18px rgba(108, 117, 125, 0.4);
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .footer a:hover {
             background-color: #495057;
-            box-shadow: 0 8px 28px rgba(73, 80, 87, 0.6);
+        }
+
+        /* ページネーション */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            gap: 10px;
+            font-weight: 600;
+        }
+
+        /* 数字リンクの基本スタイル */
+        .pagination li {
+            list-style: none;
+        }
+
+        .pagination a,
+        .pagination span {
+            color: #0288d1;
+            text-decoration: none;
+            padding: 6px 10px;
+            font-size: 15px;
+            /* no border, no background */
+            border-radius: 0;
+            box-shadow: none;
+            cursor: pointer;
+        }
+
+        /* 現在ページは太字黒色 */
+        .pagination .active span {
+            color: #000000;
+            font-weight: 900;
+            cursor: default;
+        }
+
+        /* 無効リンクは薄いグレー */
+        .pagination .disabled span {
+            color: #ccc;
+            cursor: not-allowed;
+        }
+
+        /* 矢印アイコンは非表示 */
+        .pagination svg {
+            display: none !important;
         }
     </style>
 </head>
@@ -142,7 +165,6 @@
         <a href="/practices/create">Create</a>
     </div>
 
-    {{-- フラッシュメッセージ表示 --}}
     @if(session('success'))
     <div class="alert-success">
         {{ session('success') }}
@@ -181,13 +203,16 @@
                 [$h, $m, $s] = explode(':', $duration);
                 @endphp
                 <p>Duration: {{ (int)$h }}h {{ (int)$m }}min</p>
-
                 <p>Content: {{ $practice->content }}</p>
             </div>
         </div>
         @empty
         <p>Your practice log is empty.</p>
         @endforelse
+    </div>
+
+    <div class="pagination">
+        {{ $practices->links() }}
     </div>
 
     <div class="footer">

@@ -9,14 +9,17 @@ class PracticeController extends Controller
 {
     public function index()
     {
-        $practices = (new Practice)->orderBy('date', 'desc')->get();
+        // ページネーション対応。1ページ10件
+        $practices = Practice::orderBy('date', 'desc')->paginate(10);
         return view('practices.index')->with(['practices' => $practices]);
     }
+
 
     public function create()
     {
         return view('practices.create');
     }
+
     public function store(Request $request)
     {
         $hours = (int) $request->input('hours');
@@ -44,10 +47,18 @@ class PracticeController extends Controller
         $practice = Practice::findOrFail($id);
         return view('practices.show', compact('practice'));
     }
+
     public function edit(Practice $practice)
     {
-        return view('practices.edit')->with(['practice' => $practice]);
+        [$h, $m, $s] = explode(':', $practice->duration ?? '00:00:00');
+
+        return view('practices.edit')->with([
+            'practice' => $practice,
+            'hours' => (int) $h,
+            'minutes' => (int) $m,
+        ]);
     }
+
     public function update(Request $request, Practice $practice)
     {
         $hours = (int) $request->input('hours');
@@ -67,10 +78,10 @@ class PracticeController extends Controller
 
         return redirect()->route('practices.show', $practice->id);
     }
+
     public function delete(Practice $practice)
     {
         $practice->delete();
-
         return redirect('/practices')->with('success', 'Practice record deleted successfully.');
     }
 }

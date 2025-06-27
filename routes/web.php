@@ -33,6 +33,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/practices/{id}', [PracticeController::class, 'show'])->name('practices.show');
     Route::get('/practices/{practice}/edit', [PracticeController::class, 'edit'])->name('practices.edit');
     Route::put('/practices/{practice}', [PracticeController::class, 'update'])->name('practices.update');
+    Route::delete('/practices/{practice}', [PracticeController::class, 'delete'])->name('practices.delete');
 });
 
 require __DIR__ . '/auth.php';

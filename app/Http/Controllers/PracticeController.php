@@ -7,10 +7,12 @@ use Illuminate\Http\Request;
 
 class PracticeController extends Controller
 {
-    public function index(Practice $practice)
+    public function index()
     {
-        return view('practices.index')->with(['practices' => $practice->get()]);
+        $practices = (new Practice)->orderBy('date', 'desc')->get();
+        return view('practices.index')->with(['practices' => $practices]);
     }
+
     public function create()
     {
         return view('practices.create');
@@ -64,5 +66,11 @@ class PracticeController extends Controller
         $practice->save();
 
         return redirect()->route('practices.show', $practice->id);
+    }
+    public function delete(Practice $practice)
+    {
+        $practice->delete();
+
+        return redirect('/practices')->with('success', 'Practice record deleted successfully.');
     }
 }

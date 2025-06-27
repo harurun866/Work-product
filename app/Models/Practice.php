@@ -12,7 +12,7 @@ class Practice extends Model
     protected $fillable = [
         'user_id',
         'date',
-        'time',
+        'duration',   // 'time' ではなく 'duration' ですね（controllerに合わせる場合）
         'instrument',
         'genre',
         'content',
@@ -20,4 +20,15 @@ class Practice extends Model
         'next_goal',
         'memo',
     ];
+
+    /**
+     * ページネーションで取得（指定件数）
+     *
+     * @param int $limit_count
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getPaginateByLimit(int $limit_count = 10)
+    {
+        return $this->orderBy('date', 'desc')->paginate($limit_count);
+    }
 }

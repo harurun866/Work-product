@@ -13,11 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_chatrooms', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('chatroom_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('chatroom_id')->references('id')->on('chatrooms')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->foreignId('chatroom_id')->constrained()->onDelete('cascade');
         });
     }
 

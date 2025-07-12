@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('practices.index')" :active="request()->routeIs('practices.index')">
                         {{ __('Practice Log') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('chatrooms.index')" :active="request()->routeIs('chatrooms.index')">
+                        {{ __('Community') }}
+                    </x-nav-link>
 
                 </div>
             </div>

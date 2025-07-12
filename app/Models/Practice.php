@@ -12,7 +12,7 @@ class Practice extends Model
     protected $fillable = [
         'user_id',
         'date',
-        'duration',   // 'time' ではなく 'duration' ですね（controllerに合わせる場合）
+        'duration',
         'instrument',
         'genre',
         'content',

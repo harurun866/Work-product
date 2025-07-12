@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\Chatroom;
+
 
 class User extends Authenticatable
 {
@@ -21,6 +23,14 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'introduction',
+        'genre',
+        'speciality',
+        'learning_style',
+        'year',
+        'skill',
+        'goal',
+
     ];
 
     /**
@@ -42,4 +52,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // app/Models/User.php
+
+    public function chatrooms()
+    {
+        return $this->belongsToMany(Chatroom::class, 'user_chatrooms')->withPivot('status');
+    }
 }

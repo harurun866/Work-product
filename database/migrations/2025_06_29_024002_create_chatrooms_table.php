@@ -14,9 +14,6 @@ return new class extends Migration
         Schema::create('chatrooms', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('name')->nullable();             // ルーム名
-            $table->text('room_description')->nullable();   // 説明文など
-
         });
     }
 

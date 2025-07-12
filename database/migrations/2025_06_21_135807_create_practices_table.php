@@ -14,8 +14,7 @@ return new class extends Migration
         Schema::create('practices', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->date('date')->nullable();              // 練習日
             $table->time('time')->nullable();              // 練習時間
             $table->string('instrument')->nullable();      // 楽器

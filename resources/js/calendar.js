@@ -5,6 +5,20 @@ import { Calendar } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 
+function formatDate(date, pos) {
+    const dt = new Date(date);
+    if (pos === "end") {
+        dt.setDate(dt.getDate() - 1);
+    }
+    return (
+        dt.getFullYear() +
+        "-" +
+        ("0" + (dt.getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + dt.getDate()).slice(-2)
+    );
+}
+
 // カレンダーを表示させたいタグのidを取得
 const calendarEl = document.getElementById("calendar");
 
@@ -64,11 +78,31 @@ if (calendarEl) {
                 });
         },
         // （ここまで）
+        eventClick: function (info) {
+            document.getElementById("update_id").value = info.event.id;
+            document.getElementById("update_body").value = info.event.title;
+            document.getElementById("update_date").value = formatDate(
+                info.event.start
+            );
+
+            // is_plannedはeventのextendedPropsに入れてある想定
+            document.getElementById("update_is_planned").value = info.event
+                .extendedProps.is_planned
+                ? "1"
+                : "0";
+
+            // 予定編集モーダルを開く
+            document.getElementById("modal-update").style.display = "flex";
+        },
     });
 
     // カレンダーのレンダリング
     calendar.render();
     window.closeAddModal = function () {
         document.getElementById("modal-add").style.display = "none";
+    };
+
+    window.closeUpdateModal = function () {
+        document.getElementById("modal-update").style.display = "none";
     };
 }

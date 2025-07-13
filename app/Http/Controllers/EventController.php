@@ -44,10 +44,30 @@ class EventController extends Controller
             ->select(
                 'id',
                 'body as title',    // FullCalendarのタイトル
-                'date as start'     // FullCalendarの開始日（endなし）
+                'date as start'
+                // FullCalendarの開始日（endなし）
             )
             ->where('date', '>=', $start_date)
             ->where('date', '<=', $end_date)
             ->get();
+    }
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:events,id',
+            'body' => 'required|string|max:255',
+            'date' => 'required|date',
+            'is_planned' => 'required|boolean',
+        ]);
+
+        $event = Event::find($request->input('id'));
+
+        $event->update([
+            'body' => $request->input('body'),
+            'date' => $request->input('date'),
+            'is_planned' => $request->input('is_planned'),
+        ]);
+
+        return redirect()->route('show')->with('success', '予定を更新しました。');
     }
 }

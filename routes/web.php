@@ -58,6 +58,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [EventController::class, 'show'])->name('show');
     Route::post('/dashboard/create', [EventController::class, 'create'])->name('create');
     Route::post('/dashboard/get',  [EventController::class, 'get'])->name("get");
+    Route::put('/dashboard/update', [EventController::class, 'update'])->name("update");
 });
 
 require __DIR__ . '/auth.php';

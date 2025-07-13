@@ -87,6 +87,32 @@
                 </div>
             </div>
         </div>
+        <!-- 予定編集モーダル -->
+        <div id="modal-update" class="modal">
+            <div class="modal-contents">
+                <form method="POST" action="{{ route('update') }}">
+                    @csrf
+                    @method('PUT')
+                    <input type="hidden" id="update_id" name="id" value="" />
+
+                    <label for="update_body">予定内容</label>
+                    <textarea id="update_body" name="body" rows="3" class="input-title" placeholder="内容を入力してください"></textarea>
+
+                    <label for="update_date">日付</label>
+                    <input type="date" id="update_date" name="date" class="input-date" />
+
+                    <label for="update_is_planned">予定の有無</label>
+                    <select name="is_planned" id="update_is_planned" class="input-date">
+                        <option value="1">予定あり</option>
+                        <option value="0">予定なし</option>
+                    </select>
+
+                    <button type="button" onclick="closeUpdateModal()">キャンセル</button>
+                    <button type="submit">更新</button>
+                </form>
+            </div>
+        </div>
+
     </body>
 
     <style scoped>
@@ -169,6 +195,10 @@
 
         button[type="button"]:hover {
             background-color: #6b7280;
+        }
+
+        .fc-event-title-container {
+            cursor: pointer;
         }
     </style>
     <!-- （ここまで） -->

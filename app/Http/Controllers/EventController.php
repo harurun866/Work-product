@@ -44,10 +44,49 @@ class EventController extends Controller
             ->select(
                 'id',
                 'body as title',    // FullCalendarのタイトル
-                'date as start'     // FullCalendarの開始日（endなし）
+                'date as start'
+                // FullCalendarの開始日（endなし）
             )
             ->where('date', '>=', $start_date)
             ->where('date', '<=', $end_date)
             ->get();
+    }
+    public function update(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:events,id',
+            'body' => 'required|string|max:255',
+            'date' => 'required|date',
+            'is_planned' => 'required|boolean',
+        ]);
+
+        $event = Event::find($request->input('id'));
+
+        $event->update([
+            'body' => $request->input('body'),
+            'date' => $request->input('date'),
+            'is_planned' => $request->input('is_planned'),
+        ]);
+
+        return redirect()->route('show')->with('success', '予定を更新しました。');
+    }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:events,id',
+        ]);
+
+        $event = Event::where('id', $request->input('id'))
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$event) {
+            return redirect()->route('show')->with('error', '削除対象の予定が見つかりません。');
+        }
+
+        $event->delete();
+
+        return redirect()->route('show')->with('success', '予定を削除しました。');
     }
 }

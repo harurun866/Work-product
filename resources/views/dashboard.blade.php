@@ -1,5 +1,5 @@
 <x-app-layout>
-    <x-slot name="header"></x-slot>
+
 
     <head>
         <meta charset="utf-8">
@@ -50,38 +50,127 @@
         }
     </style>
 
-    <div class="min-h-screen py-4">
-        <div class="max-w-3xl mx-auto px-4">
-            <div class="app-card text-center">
+    <body>
+        <div class="min-h-screen py-4">
+            <div class="max-w-3xl mx-auto px-4">
+                <div class="app-card text-center">
 
-                <div class="app-title">Oto Nest♪</div>
-                <div class="catch-copy">音楽の練習を、もっと楽しく、もっとつながる。</div>
-                <p class="sub-copy">Support your music habits with Oto Nest. Record your practice and stay motivated with your peers.</p>
+                    <div class="app-title">Oto Nest♪</div>
+                    <div class="catch-copy">音楽の練習を、もっと楽しく、もっとつながる。</div>
+                    <p class="sub-copy">Support your music habits with Oto Nest. Record your practice and stay motivated with your peers.</p>
 
-                <div id="calendar-container">
-                    <div id="calendar"></div>
+                    <div id="calendar-container">
+                        <div id="calendar"></div>
+                        <div id="modal-add" class="modal">
+                            <div class="modal-contents">
+                                <form method="POST" action="{{ route('create')  }}">
+                                    @csrf
+                                    <label for="body">予定内容</label>
+                                    <textarea id="body" name="body" rows="3" class="input-title" placeholder="内容を入力してください"></textarea>
+
+                                    <label for="date">日付</label>
+                                    <input type="date" id="date" name="date" class="input-date" />
+
+                                    <label for="is_planned">予定の有無</label>
+                                    <select name="is_planned" id="is_planned" class="input-date">
+                                        <option value="1">予定あり</option>
+                                        <option value="0" selected>予定なし</option>
+                                    </select>
+
+                                    <button type="button" onclick="closeAddModal()">キャンセル</button>
+                                    <button type="submit">登録</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
             </div>
         </div>
-    </div>
-    <!-- <script src="https://unpkg.com/alpinejs" defer></script>
-    <x-slot name="scripts">
-        <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.css" rel="stylesheet" />
-        <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.8/index.global.min.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                var calendar = new FullCalendar.Calendar(document.getElementById('calendar'), {
-                    initialView: 'dayGridMonth',
-                    height: 500,
-                    headerToolbar: {
-                        left: 'prev,next today',
-                        center: 'title',
-                        right: 'dayGridMonth,timeGridWeek'
-                    }
-                });
-                calendar.render();
-            });
-        </script> -->
-    </x-slot>
+    </body>
+
+    <style scoped>
+        /* モーダルのオーバーレイ */
+        .modal {
+            display: none;
+            /* 初期は非表示（JSで display:flex に切り替え） */
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            /* fixed に変更するとスクロールしても中央表示を保てる */
+            z-index: 1000;
+            /* カレンダーより前面に出す */
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        /* モーダル本体 */
+        .modal-contents {
+            background-color: #fff;
+            width: 500px;
+            padding: 24px 32px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+
+        }
+
+        /* 各フォーム項目の共通デザイン */
+        input[type="text"],
+        input[type="date"],
+        textarea,
+        select {
+            display: block;
+            width: 100%;
+            margin-bottom: 16px;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+
+        /* テキストエリアだけ高さ調整 */
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        /* セレクトだけ少し小さめに（任意） */
+        select {
+            width: 50%;
+        }
+
+        /* ボタンデザイン */
+        button {
+            padding: 8px 16px;
+            margin-right: 10px;
+            background-color: #9ca3af;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s;
+        }
+
+        button:hover {
+            background-color: #6b7280;
+        }
+
+        /* キャンセルボタンはグレー */
+        button[type="button"] {
+            background-color: #9ca3af;
+        }
+
+        button[type="button"]:hover {
+            background-color: #6b7280;
+        }
+    </style>
+    <!-- （ここまで） -->
+
 </x-app-layout>

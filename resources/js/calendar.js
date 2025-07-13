@@ -40,6 +40,30 @@ if (calendarEl) {
             end: "eventAddButton dayGridMonth,timeGridWeek", // ヘッダー右（月形式、時間形式）
         },
         height: "auto", // 高さをウィンドウサイズに揃える
+
+        //（ここから）追記
+        // DBに登録した予定を表示する
+        events: function (info, successCallback, failureCallback) {
+            // eventsはページが切り替わるたびに実行される
+            // axiosでLaravelの予定取得処理を呼び出す
+            axios
+                .post("/dashboard/get", {
+                    // 現在カレンダーが表示している日付の期間(1月ならば、start_date=1月1日、end_date=1月31日となる)
+                    start_date: info.start.valueOf(),
+                    end_date: info.end.valueOf(),
+                })
+                .then((response) => {
+                    // 既に表示されているイベントを削除（重複防止）
+                    calendar.removeAllEvents(); // ver.6でもどうやら使える（ドキュメントにはない？）
+                    // カレンダーに読み込み
+                    successCallback(response.data); // successCallbackに予定をオブジェクト型で入れるとカレンダーに表示できる
+                })
+                .catch((error) => {
+                    // バリデーションエラーなど
+                    alert("登録に失敗しました。");
+                });
+        },
+        // （ここまで）
     });
 
     // カレンダーのレンダリング

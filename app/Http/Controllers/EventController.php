@@ -11,10 +11,15 @@ class EventController extends Controller
 
     public function show()
     {
-        return view('profile.dashboard');
+        return view('dashboard');
     }
     public function create(Request $request)
     {
+        $request->validate([
+            'body' => 'required|string|max:255',
+            'date' => 'required|date',
+            'is_planned' => 'required|boolean',
+        ]);
         Event::create([
             'user_id' => Auth::id(),
             'body' => $request->input('body'),
@@ -23,5 +28,26 @@ class EventController extends Controller
         ]);
 
         return redirect()->route('show')->with('success', '予定を追加しました。');
+    }
+
+    public function get(Request $request)
+    {
+        $request->validate([
+            'start_date' => 'required|integer',
+            'end_date' => 'required|integer',
+        ]);
+
+        $start_date = date('Y-m-d', $request->input('start_date') / 1000);
+        $end_date = date('Y-m-d', $request->input('end_date') / 1000);
+
+        return Event::query()
+            ->select(
+                'id',
+                'body as title',    // FullCalendarのタイトル
+                'date as start'     // FullCalendarの開始日（endなし）
+            )
+            ->where('date', '>=', $start_date)
+            ->where('date', '<=', $end_date)
+            ->get();
     }
 }

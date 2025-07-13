@@ -110,6 +110,12 @@
                     <button type="button" onclick="closeUpdateModal()">キャンセル</button>
                     <button type="submit">更新</button>
                 </form>
+                <form id="delete-form" method="post" action="{{ route('delete') }}">
+                    @csrf
+                    @method('DELETE')
+                    <input type="hidden" id="delete-id" name="id" value="" />
+                    <button class="delete" type="button" onclick="deleteEvent()">削除</button>
+                </form>
             </div>
         </div>
 

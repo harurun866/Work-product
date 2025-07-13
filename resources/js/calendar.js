@@ -80,6 +80,7 @@ if (calendarEl) {
         // （ここまで）
         eventClick: function (info) {
             document.getElementById("update_id").value = info.event.id;
+            document.getElementById("delete-id").value = info.event.id;
             document.getElementById("update_body").value = info.event.title;
             document.getElementById("update_date").value = formatDate(
                 info.event.start
@@ -104,5 +105,13 @@ if (calendarEl) {
 
     window.closeUpdateModal = function () {
         document.getElementById("modal-update").style.display = "none";
+    };
+
+    window.deleteEvent = function () {
+        "use strict";
+
+        if (confirm("削除すると復元できません。\n本当に削除しますか？")) {
+            document.getElementById("delete-form").submit();
+        }
     };
 }

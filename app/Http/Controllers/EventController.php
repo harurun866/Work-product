@@ -70,4 +70,23 @@ class EventController extends Controller
 
         return redirect()->route('show')->with('success', '予定を更新しました。');
     }
+
+    public function delete(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|integer|exists:events,id',
+        ]);
+
+        $event = Event::where('id', $request->input('id'))
+            ->where('user_id', Auth::id())
+            ->first();
+
+        if (!$event) {
+            return redirect()->route('show')->with('error', '削除対象の予定が見つかりません。');
+        }
+
+        $event->delete();
+
+        return redirect()->route('show')->with('success', '予定を削除しました。');
+    }
 }

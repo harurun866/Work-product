@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         //Schema::create('chatrooms', function (Blueprint $table) {
-        // $table->id();
-        //  $table->timestamps();
-        // });
+        //$table->id();
+        //$table->timestamps();
+        //});
     }
 
     /**
@@ -22,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //Schema::dropIfExists('chatrooms');
+        // Schema::dropIfExists('chatrooms');
     }
 };

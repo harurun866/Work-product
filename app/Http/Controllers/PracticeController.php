@@ -29,7 +29,7 @@ class PracticeController extends Controller
         $practice = new Practice();
         $practice->user_id = auth()->id();
         $practice->date = $request->input('date');
-        $practice->duration = $duration;
+        $practice->time = $duration;
         $practice->instrument = $request->input('instrument');
         $practice->genre = $request->input('genre');
         $practice->content = $request->input('content');

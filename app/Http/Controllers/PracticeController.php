@@ -66,7 +66,7 @@ class PracticeController extends Controller
         $duration = sprintf('%02d:%02d:00', $hours, $minutes);
 
         $practice->date = $request->input('date');
-        $practice->duration = $duration;
+        $practice->time = $duration;
         $practice->instrument = $request->input('instrument');
         $practice->genre = $request->input('genre');
         $practice->content = $request->input('content');

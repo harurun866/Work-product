@@ -163,7 +163,7 @@
 
     <div class="chatroom-box">
         <div class="chatroom-description">
-            {{ $chatroom->room_description ?? '（説明はありません）' }}
+            {{ $chatroom->room_description ?? '(No description available)' }}
         </div>
 
         <div style="text-align: right;">
@@ -171,20 +171,20 @@
             @if ($pivot && $pivot->status === 'active')
             <form action="{{ route('chatrooms.away', $chatroom->id) }}" method="POST" style="display: inline;">
                 @csrf
-                <button type="submit" class="status-button">離席する</button>
+                <button type="submit" class="status-button">Set Away</button>
             </form>
             @elseif ($pivot && $pivot->status === 'away')
             <form action="{{ route('chatrooms.active', $chatroom->id) }}" method="POST" style="display: inline;">
                 @csrf
-                <button type="submit" class="status-button active">復帰する</button>
+                <button type="submit" class="status-button active">Set Active</button>
             </form>
             @endif
         </div>
 
         <form method="POST" action="{{ route('chats.post', $chatroom->id) }}" class="message-form">
             @csrf
-            <input type="text" name="body" placeholder="メッセージを入力..." required autocomplete="off">
-            <button type="submit">送信</button>
+            <input type="text" name="body" placeholder="Type your message…" required autocomplete="off">
+            <button type="submit">Send</button>
         </form>
 
         <div class="message-list">
@@ -196,13 +196,13 @@
             <div class="message-item" data-message-id="{{ $message->id }}">
                 <div class="edit-controls">
                     @if ($message->user_id === auth()->id())
-                    <button onclick="toggleEdit({{ $message->id }})">編集</button>
+                    <button onclick="toggleEdit({{ $message->id }})">Edit</button>
                     @endif
                 </div>
 
                 <strong>
                     {{ $user->name }}
-                    @if ($status === 'away')<span style="font-size: 0.8rem; color: #888;">（離席中）</span>@endif
+                    @if ($status === 'away')<span style="font-size: 0.8rem; color: #888;">(Away)</span>@endif
                 </strong>
                 <div class="message-text">{{ $message->message }}</div>
 
@@ -212,21 +212,21 @@
                     @method('PUT')
                     <input type="text" name="message" value="{{ $message->message }}">
                     <div>
-                        <button type="button" onclick="submitEdit({{ $message->id }})" class="btn-save">保存</button>
-                        <button type="button" onclick="cancelEdit({{ $message->id }})" class="btn-cancel">キャンセル</button>
-                        <button type="button" onclick="deleteMessage({{ $message->id }})" class="btn-delete">削除</button>
+                        <button type="button" onclick="submitEdit({{ $message->id }})" class="btn-save">Save</button>
+                        <button type="button" onclick="cancelEdit({{ $message->id }})" class="btn-cancel">Cancel</button>
+                        <button type="button" onclick="deleteMessage({{ $message->id }})" class="btn-delete">Delete</button>
                     </div>
                 </form>
                 @endif
             </div>
             @empty
-            <p>まだメッセージはありません。</p>
+            <p>No messages yet.</p>
             @endforelse
         </div>
     </div>
 
     <div style="text-align: center;">
-        <a href="{{ route('chatrooms.index') }}" class="back-link">← チャット一覧に戻る</a>
+        <a href="{{ route('chatrooms.index') }}" class="back-link">← Back to Chat Rooms</a>
     </div>
 
     <script>
@@ -264,13 +264,13 @@
                     cancelEdit(id);
                 })
                 .catch(err => {
-                    alert('更新に失敗しました。');
+                    alert('Failed to update.');
                     console.error(err);
                 });
         }
 
         function deleteMessage(id) {
-            if (!confirm('本当にこのメッセージを削除しますか？')) return;
+            if (!confirm('Are you sure you want to delete this message?')) return;
             const token = document.querySelector('input[name="_token"]').value;
 
             fetch(`/chats/${id}`, {
@@ -285,7 +285,7 @@
                         const item = document.querySelector(`.message-item[data-message-id="${id}"]`);
                         item.remove();
                     } else {
-                        alert('削除に失敗しました');
+                        alert('Failed to delete.');
                     }
                 });
         }

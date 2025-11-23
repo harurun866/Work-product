@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>参加中のチャットルーム</title>
+    <title>Joined Chat Rooms</title>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -89,22 +89,22 @@
 </head>
 
 <body>
-    <h1>参加中のチャットルーム一覧</h1>
+    <h1>Joined Chat Rooms</h1>
 
     <div class="chatroom-list">
         @forelse ($joinedChatrooms as $room)
         <div class="chatroom-card">
             <h2>{{ $room->name }}</h2>
-            <p>{{ $room->room_description ?? '（説明はありません）' }}</p>
-            <a href="{{ route('chatrooms.show', $room->id) }}">チャットへ</a>
+            <p>{{ $room->room_description ?? '(No description available)' }}</p>
+            <a href="{{ route('chatrooms.show', $room->id) }}">Go to Chat</a>
         </div>
         @empty
-        <p>参加中のチャットルームはありません。</p>
+        <p>You have not joined any chat rooms yet.</p>
         @endforelse
     </div>
 
     <div class="footer">
-        <a href="{{ route('chatrooms.index') }}">← 一覧に戻る</a>
+        <a href="{{ route('chatrooms.index') }}">← Back to List</a>
     </div>
 </body>
 

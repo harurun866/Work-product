@@ -205,7 +205,7 @@
         <h1>Community</h1>
 
         <div class="joined-button-container">
-            <a href="{{ route('chatrooms.joined') }}" class="joined-button">参加中のルーム一覧</a>
+            <a href="{{ route('chatrooms.joined') }}" class="joined-button">Joined Rooms</a>
         </div>
 
         <div class="chatrooms">
@@ -213,25 +213,25 @@
             <div class="chatroom-card">
                 <div class="chatroom-image" style="background-image: url('{{ $room->image_url ?? '/default.jpg' }}');">
                     @if ($room->user_id === auth()->id())
-                    <a href="{{ route('chatrooms.edit', $room->id) }}" class="edit-button">グループ情報の編集</a>
+                    <a href="{{ route('chatrooms.edit', $room->id) }}" class="edit-button">Edit Group Info</a>
                     @endif
                 </div>
                 <div class="chatroom-body">
                     <h2>{{ $room->name }}</h2>
-                    <p>{{ $room->room_description ?? '（説明はありません）' }}</p>
+                    <p>{{ $room->room_description ?? '(No description available)' }}</p>
 
                     @if (in_array($room->id, $joinedRoomIds))
-                    <a href="{{ route('chatrooms.show', $room->id) }}" class="enter-button">入室する</a>
+                    <a href="{{ route('chatrooms.show', $room->id) }}" class="enter-button">Enter</a>
                     @else
                     <form action="{{ route('chatrooms.join', $room->id) }}" method="POST">
                         @csrf
-                        <button type="submit" class="join-button">参加</button>
+                        <button type="submit" class="join-button">Join</button>
                     </form>
                     @endif
                 </div>
             </div>
             @empty
-            <p>チャットルームがまだ作成されていません。</p>
+            <p>No chat rooms have been created yet.</p>
             @endforelse
 
             <a href="{{ route('chatrooms.create') }}" class="new-group">+New Group</a>

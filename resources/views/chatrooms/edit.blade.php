@@ -87,25 +87,26 @@
         }
 
         .back-button {
+            display: inline-block;
+            /* フォームじゃなくリンクをブロック化 */
             padding: 0.5rem 1rem;
             background-color: #6c757d;
-            /* ボタン背景 */
+            /* グレー背景 */
             color: #fff;
-            /* 文字色を常に白 */
+            /* 文字は常に白 */
             border: none;
-            /* 枠線なし */
             border-radius: 30px;
             font-weight: 700;
             cursor: pointer;
             text-align: center;
             text-decoration: none;
+            /* 下線を消す */
         }
 
         .back-button:hover {
             background-color: #495057;
-            /* ホバー時の背景色変化 */
+            /* ホバー時は少し濃いめグレー */
             color: #fff;
-            /* 文字は常に白 */
         }
     </style>
 </head>
@@ -133,9 +134,7 @@
     </form>
 
     <div class="footer" style="text-align: center;">
-        <form action="{{ route('chatrooms.index') }}" method="GET" style="text-align: center;">
-            <button type="submit" class="back-button">Back to Community</button>
-        </form>
+        <a href="{{ route('chatrooms.index') }}" class="back-button">Back to Community</a>
     </div>
 </body>
 

@@ -256,22 +256,22 @@
                             <div class="modal-contents">
                                 <form method="POST" action="{{ route('create') }}">
                                     @csrf
-                                    <label for="body">予定内容</label>
-                                    <textarea id="body" name="body" rows="3" class="input-title" placeholder="内容を入力してください"></textarea>
+                                    <label for="body">Event Details</label>
+                                    <textarea id="body" name="body" rows="3" class="input-title" placeholder="Enter details"></textarea>
 
-                                    <label for="date">日付</label>
+                                    <label for="date">Date</label>
                                     <!-- type="text"にしてFlatpickr対応 -->
                                     <input type="text" id="date" name="date" class="input-date" placeholder="Select date" />
 
-                                    <label for="is_planned">予定の有無</label>
+                                    <label for="is_planned">Event Status</label>
                                     <select name="is_planned" id="is_planned" class="input-date">
-                                        <option value="1">予定あり</option>
-                                        <option value="0" selected>予定なし</option>
+                                        <option value="1">Scheduled</option>
+                                        <option value="0" selected>Not Scheduled</option>
                                     </select>
 
                                     <div class="button-row">
-                                        <button type="button" onclick="closeAddModal()">キャンセル</button>
-                                        <button type="submit">登録</button>
+                                        <button type="button" onclick="closeAddModal()">Cancel</button>
+                                        <button type="submit">Add</button>
                                     </div>
                                 </form>
                             </div>
@@ -285,23 +285,23 @@
                                     @method('PUT')
                                     <input type="hidden" id="update_id" name="id" value="" />
 
-                                    <label for="update_body">予定内容</label>
-                                    <textarea id="update_body" name="body" rows="3" class="input-title" placeholder="内容を入力してください"></textarea>
+                                    <label for="update_body">Event Details</label>
+                                    <textarea id="update_body" name="body" rows="3" class="input-title" placeholder="Enter details"></textarea>
 
-                                    <label for="update_date">日付</label>
+                                    <label for="update_date">Date</label>
                                     <!-- type="text"にしてFlatpickr対応 -->
                                     <input type="text" id="update_date" name="date" class="input-date" placeholder="Select date" />
 
-                                    <label for="update_is_planned">予定の有無</label>
+                                    <label for="update_is_planned">Event Status</label>
                                     <select name="is_planned" id="update_is_planned" class="input-date">
-                                        <option value="1">予定あり</option>
-                                        <option value="0">予定なし</option>
+                                        <option value="1">Scheduled</option>
+                                        <option value="0">Not Scheduled</option>
                                     </select>
 
                                     <div class="button-row">
-                                        <button type="button" onclick="closeUpdateModal()">キャンセル</button>
-                                        <button type="submit">更新</button>
-                                        <button class="delete" type="button" onclick="deleteEvent()">削除</button>
+                                        <button type="button" onclick="closeUpdateModal()">Cancel</button>
+                                        <button type="submit">Update</button>
+                                        <button class="delete" type="button" onclick="deleteEvent()">Delete</button>
                                     </div>
                                 </form>
 
@@ -349,7 +349,7 @@
             };
 
             function deleteEvent() {
-                if (confirm("本当に削除しますか？")) {
+                if (confirm("Are you sure you want to delete this?")) {
                     const id = document.getElementById("update_id").value;
                     document.getElementById("delete-id").value = id;
                     document.getElementById("delete-form").submit();

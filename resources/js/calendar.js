@@ -34,7 +34,7 @@ if (calendarEl) {
         initialView: "dayGridMonth", // 最初に表示させるページの形式
         customButtons: {
             eventAddButton: {
-                text: "予定を追加",
+                text: "Add Schedule",
                 click: function () {
                     // 初期化（以前入力した値をクリアする）
                     document.getElementById("body").value = "";
@@ -85,7 +85,7 @@ if (calendarEl) {
                 })
                 .catch((error) => {
                     // バリデーションエラーなど
-                    alert("登録に失敗しました。");
+                    alert("Failed to save.");
                 });
         },
         // （ここまで）
@@ -121,7 +121,11 @@ if (calendarEl) {
     window.deleteEvent = function () {
         "use strict";
 
-        if (confirm("削除すると復元できません。\n本当に削除しますか？")) {
+        if (
+            confirm(
+                "This action cannot be undone.\nAre you sure you want to delete this?"
+            )
+        ) {
             document.getElementById("delete-form").submit();
         }
     };

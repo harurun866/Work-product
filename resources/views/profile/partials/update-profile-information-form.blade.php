@@ -25,9 +25,10 @@
 
         <div class="mt-4">
             <x-input-label for="introduction" :value="__('introduction')" />
-            <textarea id="introduction" class="block mt-1 w-full"
-
-                name="introduction">{{old('introduction', $user->introduction)}}</textarea>
+            <textarea id="introduction"
+                name="introduction"
+                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                rows="4">{{ old('introduction', $user->introduction) }}</textarea>
 
             <x-input-error :messages="$errors->get('introduction')" class="mt-2" />
         </div>

@@ -90,7 +90,9 @@
             display: inline-block;
             padding: 0.5rem 1rem;
             background-color: #6c757d;
+            /* 背景色 */
             color: #fff;
+            /* 文字色を白に */
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
@@ -99,6 +101,8 @@
 
         .back-link:hover {
             background-color: #495057;
+            color: #fff;
+            /* ホバー時も白のまま */
         }
     </style>
 </head>

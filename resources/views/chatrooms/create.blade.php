@@ -85,6 +85,30 @@
             margin-top: -0.5rem;
             margin-bottom: 1rem;
         }
+
+        .back-button,
+        .back-button:link,
+        .back-button:visited,
+        .back-button:hover,
+        .back-button:active {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #6c757d;
+            /* グレー背景 */
+            color: #fff;
+            /* 文字色は常に白 */
+            text-decoration: none;
+            /* 下線を消す */
+            border-radius: 30px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background-color: #495057;
+            /* ホバー時少し濃いめグレー */
+        }
     </style>
 </head>
 
@@ -110,7 +134,7 @@
     </form>
 
     <div class="footer">
-        <a href="{{ route('chatrooms.index') }}">Back to Community</a>
+        <a href="{{ route('chatrooms.index') }}" class="back-button">Back to Community</a>
     </div>
 </body>
 

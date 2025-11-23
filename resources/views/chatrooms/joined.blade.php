@@ -104,7 +104,7 @@
     </div>
 
     <div class="footer">
-        <a href="{{ route('chatrooms.index') }}">← Back to List</a>
+        <a href="{{ route('chatrooms.index') }}">Back to List</a>
     </div>
 </body>
 

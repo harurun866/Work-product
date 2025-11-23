@@ -226,7 +226,7 @@
     </div>
 
     <div style="text-align: center;">
-        <a href="{{ route('chatrooms.index') }}" class="back-link">← Back to Chat Rooms</a>
+        <a href="{{ route('chatrooms.index') }}" class="back-link">Back to Chat Rooms</a>
     </div>
 
     <script>

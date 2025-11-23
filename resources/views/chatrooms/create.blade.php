@@ -110,7 +110,7 @@
     </form>
 
     <div class="footer">
-        <a href="{{ route('chatrooms.index') }}">← Back to Community</a>
+        <a href="{{ route('chatrooms.index') }}">Back to Community</a>
     </div>
 </body>
 

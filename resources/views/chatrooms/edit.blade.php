@@ -85,6 +85,21 @@
             margin-top: -0.5rem;
             margin-bottom: 1rem;
         }
+
+        .back-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background-color: #6c757d;
+            color: #fff;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .back-link:hover {
+            background-color: #495057;
+        }
     </style>
 </head>
 
@@ -110,8 +125,8 @@
         <button type="submit">Update</button>
     </form>
 
-    <div class="footer">
-        <a href="{{ route('chatrooms.index') }}">← Back to Community</a>
+    <div class="footer" style="text-align: center;">
+        <a href="{{ route('chatrooms.index') }}" class="back-link">Back to Community</a>
     </div>
 </body>
 

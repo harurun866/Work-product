@@ -86,27 +86,23 @@
             margin-bottom: 1rem;
         }
 
-        .back-button {
-            display: inline-block;
-            /* フォームじゃなくリンクをブロック化 */
-            padding: 0.5rem 1rem;
-            background-color: #6c757d;
-            /* グレー背景 */
+        .back-button,
+        .back-button:link,
+        .back-button:visited,
+        .back-button:hover,
+        .back-button:active {
             color: #fff;
-            /* 文字は常に白 */
-            border: none;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: center;
+            /* 文字色を常に白 */
             text-decoration: none;
             /* 下線を消す */
-        }
-
-        .back-button:hover {
-            background-color: #495057;
-            /* ホバー時は少し濃いめグレー */
-            color: #fff;
+            background-color: #6c757d;
+            /* 背景色はグレー */
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            font-weight: 700;
+            text-align: center;
+            cursor: pointer;
         }
     </style>
 </head>
